@@ -1,4 +1,9 @@
 {
+    "accountAssociation": {
+    "header": "eyJmaWQiOjE3OTkxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MjI0Q2I4QTkzMDYyZTVBYkI2NWI5MzhENzI5ZDEzMzUxMjVmMjVjMSJ9",
+    "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItZGFpbHktcXVvdGUtYi52ZXJjZWwuYXBwIn0",
+    "signature": "FEkwaRcTvkpRaiwya9FzEhSkySNx9RUrbGjXChvgqIpGskIGJpRaqem6GwUHnGLQH+H/3/vEyYLkhQUzkNW9BRs="
+  },
    "frame": {
     "name": "Daily Quotes",
     "version": "1",
@@ -17,10 +22,5 @@
     "ogDescription": "Discover inspiring quotes and share them directly on Farcaster.",
     "ogImageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
     "castShareUrl": "https://warpcast.com/~/compose?text=Check+out+Daily+Quotes+MiniApp!"
-  },
-  "accountAssociation": {
-    "header": "eyJmaWQiOjE3OTkxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MjI0Q2I4QTkzMDYyZTVBYkI2NWI5MzhENzI5ZDEzMzUxMjVmMjVjMSJ9",
-    "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItZGFpbHktcXVvdGUtYi52ZXJjZWwuYXBwIn0",
-    "signature": "FEkwaRcTvkpRaiwya9FzEhSkySNx9RUrbGjXChvgqIpGskIGJpRaqem6GwUHnGLQH+H/3/vEyYLkhQUzkNW9BRs="
   }
 }
