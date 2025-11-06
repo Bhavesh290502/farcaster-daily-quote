@@ -1,7 +1,7 @@
 {
   "name": "Daily Quote MiniApp",
-  "url": "https://your-app-domain.com",
-  "iconUrl": "https://your-app-domain.com/icon.png",
+  "url": "https://farcaster-daily-quote-b.vercel.app",
+  "iconUrl": "https://farcaster-daily-quote-b.vercel.app/icon.png",
   "description": "A simple daily quote you can share on Farcaster",
   "developer": {
     "name": "bhavesh"
