@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Quote MiniApp</title>
+  <style>
+    body { font-family: system-ui; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #fafafa; text-align: center; }
+    #quote { font-size: 1.3rem; margin: 20px; max-width: 80%; }
+    button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🌅 Daily Quote</h2>
+  <div id="quote">Loading...</div>
+  <button id="share">Share to Farcaster</button>
+
+  <script type="module">
+    import { MiniAppClient } from "@farcaster/miniapp-sdk";
+    const client = new MiniAppClient();
+
+    async function loadQuote() {
+      const res = await fetch("https://api.quotable.io/random");
+      const data = await res.json();
+      document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
+      document.getElementById("share").onclick = () => {
+        client.actions.openCastComposer({
+          text: `“${data.content}” — ${data.author} #DailyQuote`
+        });
+      };
+    }
+
+    loadQuote();
+  </script>
+</body>
+</html>

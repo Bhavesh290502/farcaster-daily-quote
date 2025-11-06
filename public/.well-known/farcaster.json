@@ -1,0 +1,9 @@
+{
+  "name": "Daily Quote MiniApp",
+  "url": "https://your-app-domain.com",
+  "iconUrl": "https://your-app-domain.com/icon.png",
+  "description": "A simple daily quote you can share on Farcaster",
+  "developer": {
+    "name": "bhavesh"
+  }
+}
