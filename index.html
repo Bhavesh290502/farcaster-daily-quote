@@ -42,35 +42,35 @@
   <button id="share">Share to Farcaster</button>
 
   <script type="module">
-    import MiniAppClient from "@farcaster/miniapp-sdk";
-    const client = new MiniAppClient();
+  import MiniAppClient from "@farcaster/miniapp-sdk";
 
-    async function loadQuote() {
-      try {
-        const res = await fetch("https://api.quotable.io/random");
-        const data = await res.json();
+  // ✅ Create client once
+  const sdk = new MiniAppClient();
 
-        // Show quote text
-        document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
+  // ✅ Wait until page is fully loaded
+  window.addEventListener("load", async () => {
+    try {
+      const res = await fetch("https://api.quotable.io/random");
+      const data = await res.json();
 
-        // Setup share button
-        document.getElementById("share").onclick = () => {
-          client.actions.openCastComposer({
-            text: `“${data.content}” — ${data.author} #DailyQuote`
-          });
-        };
+      document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
 
-        // ✅ Tell Farcaster that app is fully ready (UI + actions)
-        await client.ready();
+      document.getElementById("share").onclick = () => {
+        sdk.actions.openCastComposer({
+          text: `“${data.content}” — ${data.author} #DailyQuote`
+        });
+      };
 
-      } catch (error) {
-        console.error("Error loading quote:", error);
-        document.getElementById("quote").innerText = "Failed to load quote 😕";
-        await client.ready(); // still signal ready even if something went wrong
-      }
+      // ✅ Call ready() after everything is visible and clickable
+      await sdk.actions.ready();
+      console.log("✅ MiniApp is ready");
+
+    } catch (err) {
+      console.error("Error loading quote:", err);
+      document.getElementById("quote").innerText = "Failed to load quote 😕";
+      await sdk.actions.ready(); // even on failure
     }
-
-    loadQuote();
-  </script>
+  });
+</script>
 </body>
 </html>
