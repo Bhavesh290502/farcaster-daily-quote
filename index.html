@@ -4,6 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Quote MiniApp</title>
+
+  <!-- ✅ Farcaster MiniApp Embed Meta -->
+  <meta name="fc:miniapp" content='{
+    "version": "1",
+    "imageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
+    "button": {
+      "title": "Open MiniApp",
+      "action": {
+        "type": "launch_frame",
+        "name": "Daily Quotes",
+        "url": "https://farcaster-daily-quote-b.vercel.app",
+        "splashImageUrl": "https://farcaster-daily-quote-b.vercel.app/splash.png",
+        "splashBackgroundColor": "#ffffff"
+      }
+    }
+  }' />
+
   <style>
     body {
       font-family: system-ui;
@@ -15,16 +32,8 @@
       background: #fafafa;
       text-align: center;
     }
-    #quote {
-      font-size: 1.3rem;
-      margin: 20px;
-      max-width: 80%;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+    #quote { font-size: 1.3rem; margin: 20px; max-width: 80%; }
+    button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
   </style>
 </head>
 <body>
