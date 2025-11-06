@@ -1,10 +1,22 @@
 {
-  "name": "Daily Quote MiniApp",
-  "url": "https://farcaster-daily-quote-b.vercel.app",
-  "iconUrl": "https://farcaster-daily-quote-b.vercel.app/icon.png",
-  "description": "A simple daily quote you can share on Farcaster",
-  "developer": {
-    "name": "bhavesh"
+   "frame": {
+    "name": "Daily Quotes",
+    "version": "1",
+    "iconUrl": "https://farcaster-daily-quote-b.vercel.app/icon.png",
+    "homeUrl": "https://farcaster-daily-quote-b.vercel.app",
+    "imageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
+    "splashImageUrl": "https://farcaster-daily-quote-b.vercel.app/splash.png",
+    "splashBackgroundColor": "#ffffff",
+    "subtitle": "Quotes for you",
+    "description": "A simple daily quote you can share on Farcaster",
+    "primaryCategory": "entertainment",
+    "tags": ["quotes", "motivation", "daily", "inspiration"],
+    "tagline": "Get your daily dose of inspiration ✨",
+    "buttonTitle": "Open MiniApp",
+    "ogTitle": "Daily Quotes – Inspire Every Day",
+    "ogDescription": "Discover inspiring quotes and share them directly on Farcaster.",
+    "ogImageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
+    "castShareUrl": "https://warpcast.com/~/compose?text=Check+out+Daily+Quotes+MiniApp!"
   },
   "accountAssociation": {
     "header": "eyJmaWQiOjE3OTkxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MjI0Q2I4QTkzMDYyZTVBYkI2NWI5MzhENzI5ZDEzMzUxMjVmMjVjMSJ9",
