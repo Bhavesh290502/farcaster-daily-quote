@@ -5,5 +5,10 @@
   "description": "A simple daily quote you can share on Farcaster",
   "developer": {
     "name": "bhavesh"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE3OTkxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MjI0Q2I4QTkzMDYyZTVBYkI2NWI5MzhENzI5ZDEzMzUxMjVmMjVjMSJ9",
+    "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItZGFpbHktcXVvdGUtYi52ZXJjZWwuYXBwIn0",
+    "signature": "FEkwaRcTvkpRaiwya9FzEhSkySNx9RUrbGjXChvgqIpGskIGJpRaqem6GwUHnGLQH+H/3/vEyYLkhQUzkNW9BRs="
   }
 }
