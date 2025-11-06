@@ -17,20 +17,25 @@
 
   <script type="module">
     import MiniAppClient from "@farcaster/miniapp-sdk";
-    const client = new MiniAppClient();
+const client = new MiniAppClient();
 
-    async function loadQuote() {
-      const res = await fetch("https://api.quotable.io/random");
-      const data = await res.json();
-      document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
-      document.getElementById("share").onclick = () => {
-        client.actions.openCastComposer({
-          text: `“${data.content}” — ${data.author} #DailyQuote`
-        });
-      };
-    }
+async function loadQuote() {
+  const res = await fetch("https://api.quotable.io/random");
+  const data = await res.json();
+  document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
 
-    loadQuote();
+  // Now that UI is ready:
+  await client.ready();
+
+  document.getElementById("share").onclick = () => {
+    client.actions.openCastComposer({
+      text: `“${data.content}” — ${data.author} #DailyQuote`
+    });
+  };
+}
+
+loadQuote();
+
   </script>
 </body>
 </html>
