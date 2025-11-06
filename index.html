@@ -5,9 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Quote MiniApp</title>
   <style>
-    body { font-family: system-ui; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #fafafa; text-align: center; }
-    #quote { font-size: 1.3rem; margin: 20px; max-width: 80%; }
-    button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
+    body {
+      font-family: system-ui;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #fafafa;
+      text-align: center;
+    }
+    #quote {
+      font-size: 1.3rem;
+      margin: 20px;
+      max-width: 80%;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -17,25 +34,34 @@
 
   <script type="module">
     import MiniAppClient from "@farcaster/miniapp-sdk";
-const client = new MiniAppClient();
+    const client = new MiniAppClient();
 
-async function loadQuote() {
-  const res = await fetch("https://api.quotable.io/random");
-  const data = await res.json();
-  document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
+    async function loadQuote() {
+      try {
+        const res = await fetch("https://api.quotable.io/random");
+        const data = await res.json();
 
-  // Now that UI is ready:
-  await client.ready();
+        // Show quote text
+        document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
 
-  document.getElementById("share").onclick = () => {
-    client.actions.openCastComposer({
-      text: `“${data.content}” — ${data.author} #DailyQuote`
-    });
-  };
-}
+        // Setup share button
+        document.getElementById("share").onclick = () => {
+          client.actions.openCastComposer({
+            text: `“${data.content}” — ${data.author} #DailyQuote`
+          });
+        };
 
-loadQuote();
+        // ✅ Tell Farcaster that app is fully ready (UI + actions)
+        await client.ready();
 
+      } catch (error) {
+        console.error("Error loading quote:", error);
+        document.getElementById("quote").innerText = "Failed to load quote 😕";
+        await client.ready(); // still signal ready even if something went wrong
+      }
+    }
+
+    loadQuote();
   </script>
 </body>
 </html>
