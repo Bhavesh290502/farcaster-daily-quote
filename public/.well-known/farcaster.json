@@ -11,9 +11,9 @@
     "description": "A simple daily quote you can share on Farcaster",
     "primaryCategory": "entertainment",
     "tags": ["quotes", "motivation", "daily", "inspiration"],
-    "tagline": "Get your daily dose of inspiration ✨",
+    "tagline": "Your daily dose of inspiration",
     "buttonTitle": "Open MiniApp",
-    "ogTitle": "Daily Quotes – Inspire Every Day",
+    "ogTitle": "Daily Quotes –Inspire Everyday",
     "ogDescription": "Discover inspiring quotes and share them directly on Farcaster.",
     "ogImageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
     "castShareUrl": "https://warpcast.com/~/compose?text=Check+out+Daily+Quotes+MiniApp!"
