@@ -1,17 +1,17 @@
 {
-    "accountAssociation": {
+  "accountAssociation": {
     "header": "eyJmaWQiOjE3OTkxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MjI0Q2I4QTkzMDYyZTVBYkI2NWI5MzhENzI5ZDEzMzUxMjVmMjVjMSJ9",
     "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItZGFpbHktcXVvdGUtYi52ZXJjZWwuYXBwIn0",
     "signature": "FEkwaRcTvkpRaiwya9FzEhSkySNx9RUrbGjXChvgqIpGskIGJpRaqem6GwUHnGLQH+H/3/vEyYLkhQUzkNW9BRs="
   },
-   "frame": {
-    "name": "Daily Quotes",
+  "miniapp": {
     "version": "1",
+    "name": "Daily Quotes",
     "iconUrl": "https://farcaster-daily-quote-b.vercel.app/icon.png",
     "homeUrl": "https://farcaster-daily-quote-b.vercel.app",
     "imageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
     "splashImageUrl": "https://farcaster-daily-quote-b.vercel.app/splash.png",
-    "splashBackgroundColor": "#ffA500",
+    "splashBackgroundColor": "#FFA500",
     "subtitle": "Quotes for you",
     "description": "A simple daily quote you can share on Farcaster",
     "primaryCategory": "entertainment",
