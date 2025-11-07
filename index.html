@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Quote MiniApp</title>
 
-  <!-- ✅ Farcaster MiniApp Embed Meta -->
   <meta name="fc:miniapp" content='{
     "version": "1",
     "imageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
@@ -20,6 +19,7 @@
       }
     }
   }'>
+
   <style>
     body {
       font-family: system-ui;
@@ -48,13 +48,12 @@
   <div id="quote">Loading...</div>
   <button id="share">Share to Farcaster</button>
 
-  <!-- ✅ Use SDK via ESM CDN (simplest) -->
   <script type="module">
-    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
+    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
     async function loadQuote() {
       try {
-        const res = await fetch("https://api.quotable.io/random");
+        const res = await fetch("https://farcaster-daily-quote-b.vercel.app/api/quote");
         const data = await res.json();
 
         document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
@@ -65,13 +64,12 @@
           });
         };
 
-        // ✅ Tell Farcaster the UI is ready
         await sdk.actions.ready();
         console.log("✅ MiniApp ready event sent");
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error fetching quote:", error);
         document.getElementById("quote").innerText = "Failed to load quote 😕";
-        await sdk.actions.ready(); // still call ready even on failure
+        await sdk.actions.ready();
       }
     }
 

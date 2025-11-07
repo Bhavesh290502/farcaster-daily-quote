@@ -3,11 +3,31 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  try {
+    const response = await fetch("https://zenquotes.io/api/random", {
+      headers: {
+        "User-Agent": "FarcasterMiniApp/1.0",
+        "Accept": "application/json",
+      },
+    });
 
-  // Just return a static quote directly
-  res.status(200).json({
-    content: "Be yourself; everyone else is already taken.",
-    author: "Oscar Wilde",
-  });
+    if (!response.ok) {
+      throw new Error(`Upstream error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // ZenQuotes returns an array, we pick the first quote
+    const quote = {
+      content: data[0].q,
+      author: data[0].a,
+    };
+
+    // ✅ Allow cross-origin requests
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.status(200).json(quote);
+  } catch (error) {
+    console.error("❌ Quote API error:", error.message);
+    res.status(500).json({ error: "Failed to load quote", detail: error.message });
+  }
 }
