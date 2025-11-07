@@ -134,34 +134,54 @@
   </div>
 
   <script type="module">
-    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+  import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
-    async function loadQuote() {
-      try {
-        const res = await fetch("https://farcaster-daily-quote-b.vercel.app/api/quote");
-        const data = await res.json();
+  let currentQuote = { content: '', author: '' };
 
-        document.getElementById("quote").innerText = `“${data.content}”`;
-        document.getElementById("author").innerText = `— ${data.author}`;
+  async function loadQuote() {
+    try {
+      const res = await fetch("https://farcaster-daily-quote-b.vercel.app/api/quote");
+      const data = await res.json();
 
-        document.getElementById("share").onclick = () => {
-          sdk.actions.openCastComposer({
-            text: `“${data.content}” — ${data.author} #DailyQuote`
-          });
-        };
+      currentQuote = data;
+      document.getElementById("quote").innerText = `“${data.content}”`;
+      document.getElementById("author").innerText = `— ${data.author}`;
 
-        await sdk.actions.ready();
-        console.log("✅ MiniApp ready");
-      } catch (error) {
-        console.error("Error fetching quote:", error);
-        document.getElementById("quote").innerText = "Failed to load quote 😕";
-        await sdk.actions.ready();
-      }
+      console.log("✅ Quote loaded");
+    } catch (error) {
+      console.error("Error fetching quote:", error);
+      document.getElementById("quote").innerText = "Failed to load quote 😕";
+      document.getElementById("author").innerText = "";
     }
+  }
 
-    // 🔄 Fetch new quote on button click
-    document.getElementById("newQuote").onclick = loadQuote;
-    window.addEventListener("load", loadQuote);
-  </script>
+  async function initMiniApp() {
+    try {
+      // Wait for Farcaster SDK initialization
+      await sdk.actions.ready();
+      console.log("✅ MiniApp ready and SDK initialized");
+
+      // Register event listeners AFTER ready
+      document.getElementById("share").onclick = async () => {
+        try {
+          await sdk.actions.openCastComposer({
+            text: `“${currentQuote.content}” — ${currentQuote.author} #DailyQuote`
+          });
+        } catch (err) {
+          console.error("Share failed:", err);
+          alert("🟣 Share only works inside Farcaster.");
+        }
+      };
+
+      document.getElementById("newQuote").onclick = loadQuote;
+      await loadQuote();
+    } catch (err) {
+      console.error("MiniApp init failed:", err);
+    }
+  }
+
+  window.addEventListener("load", initMiniApp);
+</script>
+
 </body>
 </html>
