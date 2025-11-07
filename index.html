@@ -134,20 +134,19 @@
   </div>
 
   <script type="module">
-  import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+  import { sdk } from "https://unpkg.com/@farcaster/miniapp-sdk@latest/dist/index.js";
 
-  let currentQuote = { content: '', author: '' };
+  let currentQuote = { content: "", author: "" };
 
   async function loadQuote() {
     try {
       const res = await fetch("https://farcaster-daily-quote-b.vercel.app/api/quote");
       const data = await res.json();
-
       currentQuote = data;
+
       document.getElementById("quote").innerText = `“${data.content}”`;
       document.getElementById("author").innerText = `— ${data.author}`;
 
-      console.log("✅ Quote loaded");
     } catch (error) {
       console.error("Error fetching quote:", error);
       document.getElementById("quote").innerText = "Failed to load quote 😕";
@@ -156,32 +155,29 @@
   }
 
   async function initMiniApp() {
-    try {
-      // Wait for Farcaster SDK initialization
-      await sdk.actions.ready();
-      console.log("✅ MiniApp ready and SDK initialized");
+    await sdk.actions.ready();
+    console.log("✅ SDK Ready");
+    console.log("MiniApp environment:", sdk.environment);
 
-      // Register event listeners AFTER ready
+    if (sdk.environment === "warpcast") {
       document.getElementById("share").onclick = async () => {
-        try {
-          await sdk.actions.openCastComposer({
-            text: `“${currentQuote.content}” — ${currentQuote.author} #DailyQuote`
-          });
-        } catch (err) {
-          console.error("Share failed:", err);
-          alert("🟣 Share only works inside Farcaster.");
-        }
+        await sdk.actions.openCastComposer({
+          text: `“${currentQuote.content}” — ${currentQuote.author} #DailyQuote`
+        });
       };
-
-      document.getElementById("newQuote").onclick = loadQuote;
-      await loadQuote();
-    } catch (err) {
-      console.error("MiniApp init failed:", err);
+    } else {
+      document.getElementById("share").innerText = "🌐 Open in Farcaster to Share";
+      document.getElementById("share").disabled = true;
+      document.getElementById("share").style.opacity = "0.6";
     }
+
+    document.getElementById("newQuote").onclick = loadQuote;
+    await loadQuote();
   }
 
   window.addEventListener("load", initMiniApp);
 </script>
+
 
 </body>
 </html>
