@@ -17,13 +17,12 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // ZenQuotes returns an array, we pick the first quote
+    // ✅ ZenQuotes returns an array, so we grab the first element
     const quote = {
-      content: data[0].q,
-      author: data[0].a,
+      content: data[0]?.q || "Keep pushing forward.",
+      author: data[0]?.a || "Unknown",
     };
 
-    // ✅ Allow cross-origin requests
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(200).json(quote);
   } catch (error) {
