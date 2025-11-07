@@ -19,8 +19,7 @@
         "splashBackgroundColor": "#ffffff"
       }
     }
-  }' />
-
+  }'>
   <style>
     body {
       font-family: system-ui;
@@ -32,8 +31,16 @@
       background: #fafafa;
       text-align: center;
     }
-    #quote { font-size: 1.3rem; margin: 20px; max-width: 80%; }
-    button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
+    #quote {
+      font-size: 1.3rem;
+      margin: 20px;
+      max-width: 80%;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -41,36 +48,34 @@
   <div id="quote">Loading...</div>
   <button id="share">Share to Farcaster</button>
 
+  <!-- ✅ Use SDK via ESM CDN (simplest) -->
   <script type="module">
-  import MiniAppClient from "@farcaster/miniapp-sdk";
+    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
 
-  // ✅ Create client once
-  const sdk = new MiniAppClient();
+    async function loadQuote() {
+      try {
+        const res = await fetch("https://api.quotable.io/random");
+        const data = await res.json();
 
-  // ✅ Wait until page is fully loaded
-  window.addEventListener("load", async () => {
-    try {
-      const res = await fetch("https://api.quotable.io/random");
-      const data = await res.json();
+        document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
 
-      document.getElementById("quote").innerText = `"${data.content}" — ${data.author}`;
+        document.getElementById("share").onclick = () => {
+          sdk.actions.openCastComposer({
+            text: `“${data.content}” — ${data.author} #DailyQuote`
+          });
+        };
 
-      document.getElementById("share").onclick = () => {
-        sdk.actions.openCastComposer({
-          text: `“${data.content}” — ${data.author} #DailyQuote`
-        });
-      };
-
-      // ✅ Call ready() after everything is visible and clickable
-      await sdk.actions.ready();
-      console.log("✅ MiniApp is ready");
-
-    } catch (err) {
-      console.error("Error loading quote:", err);
-      document.getElementById("quote").innerText = "Failed to load quote 😕";
-      await sdk.actions.ready(); // even on failure
+        // ✅ Tell Farcaster the UI is ready
+        await sdk.actions.ready();
+        console.log("✅ MiniApp ready event sent");
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("quote").innerText = "Failed to load quote 😕";
+        await sdk.actions.ready(); // still call ready even on failure
+      }
     }
-  });
-</script>
+
+    window.addEventListener("load", loadQuote);
+  </script>
 </body>
 </html>
