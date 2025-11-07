@@ -11,7 +11,7 @@
     "homeUrl": "https://farcaster-daily-quote-b.vercel.app",
     "imageUrl": "https://farcaster-daily-quote-b.vercel.app/image.png",
     "splashImageUrl": "https://farcaster-daily-quote-b.vercel.app/splash.png",
-    "splashBackgroundColor": "#ffffff",
+    "splashBackgroundColor": "#ffA500",
     "subtitle": "Quotes for you",
     "description": "A simple daily quote you can share on Farcaster",
     "primaryCategory": "entertainment",
